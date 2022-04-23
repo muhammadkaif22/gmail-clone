@@ -4,21 +4,18 @@ import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  selectOpenSignupState,
-  selectLoadingState,
-} from "../../Redux/features/AllGlobalStates";
+import { selectLoadingState } from "../../Redux/features/AllGlobalStates";
 import {
   CloseSignUp,
   setloadingTrue,
   setloadingFalse,
 } from "../../Redux/features/AllGlobalStates";
 import RandomLoadingTime from "../../helperFuntiions/RamdomLoadingTimeing";
-
+import { auth } from "../../backend/firebase/config";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import "./signup.css";
 
 const Signup = () => {
-  const openSignup = useSelector(selectOpenSignupState);
   const Loading = useSelector(selectLoadingState);
   const dispatch = useDispatch();
   const [showpassword, setshowpassword] = useState(false);
@@ -37,6 +34,25 @@ const Signup = () => {
     }, RandomLoadingTime());
   };
 
+  const SignUpTheUser = () => {
+    try {
+      dispatch(setloadingTrue());
+      setTimeout(async () => {
+        await createUserWithEmailAndPassword(
+          auth,
+          userdeltails.email,
+          userdeltails.password
+        );
+        await updateProfile(auth.currentUser, {
+          displayName: `${userdeltails.firstname} ${userdeltails.lastname}`,
+        });
+        dispatch(setloadingFalse());
+        dispatch(CloseSignUp());
+      }, RandomLoadingTime());
+    } catch (err) {
+      alert(err.message);
+    }
+  };
   return (
     <>
       <div className={`overlay ${Loading && "active"}`} />
@@ -149,6 +165,7 @@ const Signup = () => {
                 variant="contained"
                 size="medium"
                 style={{ textTransform: "capitalize" }}
+                onClick={SignUpTheUser}
               >
                 Create
               </Button>

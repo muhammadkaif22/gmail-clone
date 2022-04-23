@@ -77,12 +77,17 @@
 .sign__body form .input {
   width: 80%;
 }
+
+.signup__showpassword {
+  margin: 7px 10% 0;
+}
+
 .sign__body > span {
   width: 90%;
   display: block;
   font-size: 0.9rem;
   color: var(--LightFontBlack-x2);
-  margin: 42px 10% 40px;
+  margin: 32px 10% 40px;
 }
 .signin__buttons {
   width: 85%;

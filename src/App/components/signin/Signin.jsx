@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { useSelector, useDispatch } from "react-redux";
+
 import {
   selectOpenSignupState,
   selectLoadingState,
@@ -13,12 +16,16 @@ import {
 } from "../../Redux/features/AllGlobalStates";
 import SignUp from "../signup/Signup";
 import RandomLoadingTime from "../../helperFuntiions/RamdomLoadingTimeing";
+import { auth } from "../../backend/firebase/config";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 import "./signin.css";
 
 const Signin = () => {
   const openSignup = useSelector(selectOpenSignupState);
   const Loading = useSelector(selectLoadingState);
   const dispatch = useDispatch();
+  const [showpassword, setshowpassword] = useState(false);
 
   let [userdeltails, setuserdeltails] = useState({
     email: "",
@@ -29,6 +36,18 @@ const Signin = () => {
     dispatch(setloadingTrue());
     setTimeout(() => {
       dispatch(OpenSignUp());
+      dispatch(setloadingFalse());
+    }, RandomLoadingTime());
+  };
+
+  const SignInTheUser = () => {
+    dispatch(setloadingTrue());
+    setTimeout(async () => {
+      await signInWithEmailAndPassword(
+        auth,
+        userdeltails.email,
+        userdeltails.password
+      );
       dispatch(setloadingFalse());
     }, RandomLoadingTime());
   };
@@ -69,7 +88,7 @@ const Signin = () => {
                   <TextField
                     id="demo-helper-text-aligned-no-helper"
                     label="Password"
-                    type="password"
+                    type={showpassword ? "text" : "password"}
                     className="input"
                     value={userdeltails.password}
                     onChange={(e) =>
@@ -80,6 +99,21 @@ const Signin = () => {
                     }
                   />
                 </form>
+
+                <div className="signup__showpassword">
+                  <FormControlLabel
+                    style={{ userSelect: "none" }}
+                    control={
+                      <Checkbox
+                        checked={showpassword}
+                        label="Show Password"
+                        onChange={(e) => setshowpassword(e.target.checked)}
+                        inputProps={{ "aria-label": "controlled" }}
+                      />
+                    }
+                    label="Show Password"
+                  />
+                </div>
 
                 <span>
                   Not your computer? Use guest mode to sign in privately?{" "}
@@ -97,7 +131,11 @@ const Signin = () => {
                   >
                     create Account
                   </Button>
-                  <Button variant="contained" size="medium">
+                  <Button
+                    variant="contained"
+                    size="medium"
+                    onClick={SignInTheUser}
+                  >
                     Sign in
                   </Button>
                 </div>
