@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,6 +19,11 @@ const Signin = () => {
   const openSignup = useSelector(selectOpenSignupState);
   const Loading = useSelector(selectLoadingState);
   const dispatch = useDispatch();
+
+  let [userdeltails, setuserdeltails] = useState({
+    email: "",
+    password: "",
+  });
 
   const OpenSingupSec = () => {
     dispatch(setloadingTrue());
@@ -53,12 +58,26 @@ const Signin = () => {
                     label="Email"
                     type="email"
                     className="input"
+                    value={userdeltails.email}
+                    onChange={(e) =>
+                      setuserdeltails({
+                        ...userdeltails,
+                        email: e.target.value,
+                      })
+                    }
                   />
                   <TextField
                     id="demo-helper-text-aligned-no-helper"
                     label="Password"
                     type="password"
                     className="input"
+                    value={userdeltails.password}
+                    onChange={(e) =>
+                      setuserdeltails({
+                        ...userdeltails,
+                        password: e.target.value,
+                      })
+                    }
                   />
                 </form>
 

@@ -22,6 +22,12 @@ const Signup = () => {
   const Loading = useSelector(selectLoadingState);
   const dispatch = useDispatch();
   const [showpassword, setshowpassword] = useState(false);
+  let [userdeltails, setuserdeltails] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
 
   const SigninNow = () => {
     dispatch(setloadingTrue());
@@ -55,6 +61,12 @@ const Signup = () => {
                   label="Fist Name"
                   type="text"
                   className="input"
+                  onChange={(e) =>
+                    setuserdeltails({
+                      ...userdeltails,
+                      firstname: e.target.value,
+                    })
+                  }
                 />
                 <TextField
                   //   helperText="Please enter your name"
@@ -62,6 +74,12 @@ const Signup = () => {
                   label="Last Name"
                   type="text"
                   className="input"
+                  onChange={(e) =>
+                    setuserdeltails({
+                      ...userdeltails,
+                      lastname: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="inputFlds">
@@ -71,6 +89,12 @@ const Signup = () => {
                   label="Email"
                   type="email"
                   className="input"
+                  onChange={(e) =>
+                    setuserdeltails({
+                      ...userdeltails,
+                      email: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="inputFlds">
@@ -78,14 +102,20 @@ const Signup = () => {
                   //   helperText="Please enter your name"
                   id="demo-helper-text-aligned"
                   label="Password"
-                  type="password"
+                  type={showpassword ? "text" : "password"}
                   className="input"
+                  onChange={(e) =>
+                    setuserdeltails({
+                      ...userdeltails,
+                      password: e.target.value,
+                    })
+                  }
                 />
                 <TextField
                   //   helperText="Please enter your name"
                   id="demo-helper-text-aligned"
                   label="Confirm Password"
-                  type="password"
+                  type={showpassword ? "text" : "password"}
                   className="input"
                 />
               </div>
