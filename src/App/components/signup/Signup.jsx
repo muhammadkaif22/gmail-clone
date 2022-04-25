@@ -35,8 +35,6 @@ const Signup = () => {
     password: { state: false, msg: "" },
   });
 
-  console.log(errors);
-
   const SigninNow = () => {
     dispatch(setloadingTrue());
     setTimeout(() => {
@@ -45,7 +43,7 @@ const Signup = () => {
     }, RandomLoadingTime());
   };
 
-  const SignUpTheUser = () => {
+  const SignUpTheUser = async () => {
     if (
       userdeltails.firstname.length > 2 &&
       userdeltails.lastname.length > 2 &&
@@ -53,23 +51,34 @@ const Signup = () => {
       userdeltails.password.length > 7 &&
       userdeltails.password == userdeltails.confirmPassword
     ) {
-      try {
-        dispatch(setloadingTrue());
-        setTimeout(async () => {
-          await createUserWithEmailAndPassword(
-            auth,
-            userdeltails.email,
-            userdeltails.password
-          );
-          await updateProfile(auth.currentUser, {
-            displayName: `${userdeltails.firstname} ${userdeltails.lastname}`,
+      dispatch(setloadingTrue());
+      setTimeout(() => {
+        createUserWithEmailAndPassword(
+          auth,
+          userdeltails.email,
+          userdeltails.password
+        )
+          .then(() => {
+            updateProfile(auth.currentUser, {
+              displayName: `${userdeltails.firstname} ${userdeltails.lastname}`,
+            });
+          })
+          .then(() => {
+            dispatch(setloadingFalse());
+            dispatch(CloseSignUp());
+          })
+          .catch((error) => {
+            if (error.code == "auth/email-already-in-use") {
+              dispatch(setloadingFalse());
+              seterrors({
+                email: {
+                  state: true,
+                  msg: "Email already in use please try again",
+                },
+              });
+            }
           });
-          dispatch(setloadingFalse());
-          dispatch(CloseSignUp());
-        }, RandomLoadingTime());
-      } catch (err) {
-        alert(err.message);
-      }
+      }, RandomLoadingTime());
     } else {
       seterrors({
         firstname: {

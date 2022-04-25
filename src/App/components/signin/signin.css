@@ -44,8 +44,9 @@
   gap: 7px;
 }
 .top__logoWapper {
-  width: 170px;
+  width: 180px;
   height: 40px;
+  transform: translate(-2px);
 }
 .top__logoWapper img {
   width: 100%;

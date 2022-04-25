@@ -56,7 +56,14 @@ const Signin = () => {
             userdeltails.password
           );
         } catch (err) {
-          alert(err.message);
+          if (err.code == "auth/user-not-found") {
+            dispatch(setloadingFalse());
+            seterrors({ email: { state: true, msg: "user is not existed" } });
+          } else if (err.code == "auth/wrong-password") {
+            seterrors({
+              password: { state: true, msg: "wrong password please try again" },
+            });
+          }
         }
         dispatch(setloadingFalse());
       }, RandomLoadingTime());
