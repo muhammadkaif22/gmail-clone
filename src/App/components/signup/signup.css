@@ -87,9 +87,20 @@
 .inputFlds > .input {
   flex: 1;
 }
+form .passwordHypertxt {
+  display: block;
+  width: 90%;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--LightFontBlack);
+  transform: translateY(-7px);
+  user-select: none;
+  color: red;
+  text-align: center;
+}
 
 .signup__showpassword {
-  margin-top: 8px;
+  margin: 8px 0;
 }
 
 .signup__buttons {

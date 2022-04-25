@@ -19,12 +19,23 @@ const Signup = () => {
   const Loading = useSelector(selectLoadingState);
   const dispatch = useDispatch();
   const [showpassword, setshowpassword] = useState(false);
+
   let [userdeltails, setuserdeltails] = useState({
     firstname: "",
     lastname: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
+
+  let [errors, seterrors] = useState({
+    firstname: { state: false, msg: "" },
+    lastname: { state: false, msg: "" },
+    email: { state: false, msg: "" },
+    password: { state: false, msg: "" },
+  });
+
+  console.log(errors);
 
   const SigninNow = () => {
     dispatch(setloadingTrue());
@@ -35,22 +46,67 @@ const Signup = () => {
   };
 
   const SignUpTheUser = () => {
-    try {
-      dispatch(setloadingTrue());
-      setTimeout(async () => {
-        await createUserWithEmailAndPassword(
-          auth,
-          userdeltails.email,
-          userdeltails.password
-        );
-        await updateProfile(auth.currentUser, {
-          displayName: `${userdeltails.firstname} ${userdeltails.lastname}`,
-        });
-        dispatch(setloadingFalse());
-        dispatch(CloseSignUp());
-      }, RandomLoadingTime());
-    } catch (err) {
-      alert(err.message);
+    if (
+      userdeltails.firstname.length > 2 &&
+      userdeltails.lastname.length > 2 &&
+      userdeltails.email.length > 7 &&
+      userdeltails.password.length > 7 &&
+      userdeltails.password == userdeltails.confirmPassword
+    ) {
+      try {
+        dispatch(setloadingTrue());
+        setTimeout(async () => {
+          await createUserWithEmailAndPassword(
+            auth,
+            userdeltails.email,
+            userdeltails.password
+          );
+          await updateProfile(auth.currentUser, {
+            displayName: `${userdeltails.firstname} ${userdeltails.lastname}`,
+          });
+          dispatch(setloadingFalse());
+          dispatch(CloseSignUp());
+        }, RandomLoadingTime());
+      } catch (err) {
+        alert(err.message);
+      }
+    } else {
+      seterrors({
+        firstname: {
+          state: true,
+          msg:
+            userdeltails.firstname.length == false
+              ? "This input cant be black"
+              : seterrors({ firstname: { state: false, msg: "" } }),
+        },
+        lastname: {
+          state: true,
+          msg:
+            userdeltails.lastname.length == false
+              ? "This input cant be black"
+              : seterrors({ lastname: { state: false, msg: "" } }),
+        },
+        email: {
+          state: true,
+          msg:
+            userdeltails.email.length == false
+              ? "The Email is Required"
+              : userdeltails.email.length < 10
+              ? "Please write the corrent email"
+              : seterrors({ email: { state: false, msg: "" } }),
+        },
+        password: {
+          state: true,
+          msg:
+            userdeltails.password.length == false
+              ? "The password is Required"
+              : userdeltails.password.length < 7
+              ? "Your Password must be upto 8 charates or numbers"
+              : userdeltails.password !== userdeltails.confirmPassword
+              ? "The Password did not match to each other try again"
+              : seterrors({ password: { state: false, msg: "" } }),
+        },
+      });
     }
   };
   return (
@@ -72,7 +128,8 @@ const Signup = () => {
             <form>
               <div className="inputFlds">
                 <TextField
-                  //   helperText="Please enter your name"
+                  helperText={errors.firstname?.state && errors.firstname?.msg}
+                  error={errors.firstname?.state ? true : false}
                   id="demo-helper-text-aligned"
                   label="Fist Name"
                   type="text"
@@ -85,7 +142,8 @@ const Signup = () => {
                   }
                 />
                 <TextField
-                  //   helperText="Please enter your name"
+                  helperText={errors.lastname?.state && errors.lastname?.msg}
+                  error={errors.lastname?.state ? true : false}
                   id="demo-helper-text-aligned"
                   label="Last Name"
                   type="text"
@@ -100,7 +158,8 @@ const Signup = () => {
               </div>
               <div className="inputFlds">
                 <TextField
-                  //   helperText="Please enter your name"
+                  helperText={errors.email?.state && errors.email?.msg}
+                  error={errors.email?.state ? true : false}
                   id="demo-helper-text-aligned"
                   label="Email"
                   type="email"
@@ -115,7 +174,6 @@ const Signup = () => {
               </div>
               <div className="inputFlds">
                 <TextField
-                  //   helperText="Please enter your name"
                   id="demo-helper-text-aligned"
                   label="Password"
                   type={showpassword ? "text" : "password"}
@@ -128,13 +186,21 @@ const Signup = () => {
                   }
                 />
                 <TextField
-                  //   helperText="Please enter your name"
                   id="demo-helper-text-aligned"
                   label="Confirm Password"
                   type={showpassword ? "text" : "password"}
                   className="input"
+                  onChange={(e) =>
+                    setuserdeltails({
+                      ...userdeltails,
+                      confirmPassword: e.target.value,
+                    })
+                  }
                 />
               </div>
+              <p className="passwordHypertxt">
+                {errors.password?.state && errors.password?.msg}
+              </p>
             </form>
 
             <div className="signup__showpassword">

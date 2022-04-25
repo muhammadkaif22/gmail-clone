@@ -32,6 +32,11 @@ const Signin = () => {
     password: "",
   });
 
+  const [errors, seterrors] = useState({
+    email: { state: false, msg: "" },
+    password: { state: false, msg: "" },
+  });
+
   const OpenSingupSec = () => {
     dispatch(setloadingTrue());
     setTimeout(() => {
@@ -41,15 +46,42 @@ const Signin = () => {
   };
 
   const SignInTheUser = () => {
-    dispatch(setloadingTrue());
-    setTimeout(async () => {
-      await signInWithEmailAndPassword(
-        auth,
-        userdeltails.email,
-        userdeltails.password
-      );
-      dispatch(setloadingFalse());
-    }, RandomLoadingTime());
+    if (userdeltails.email.length > 10 && userdeltails.password.length > 7) {
+      dispatch(setloadingTrue());
+      setTimeout(async () => {
+        try {
+          await signInWithEmailAndPassword(
+            auth,
+            userdeltails.email,
+            userdeltails.password
+          );
+        } catch (err) {
+          alert(err.message);
+        }
+        dispatch(setloadingFalse());
+      }, RandomLoadingTime());
+    } else {
+      seterrors({
+        email: {
+          state: true,
+          msg:
+            userdeltails.email.length == false
+              ? "The Email is Required"
+              : userdeltails.email.length < 7
+              ? "Please write the corrent email"
+              : seterrors({ email: { state: false, msg: "" } }),
+        },
+        password: {
+          state: true,
+          msg:
+            userdeltails.password.length == false
+              ? "The password is Required"
+              : userdeltails.password.length < 8
+              ? "Your Password must be upto 8 charates or numbers"
+              : "",
+        },
+      });
+    }
   };
 
   return (
@@ -72,11 +104,12 @@ const Signin = () => {
               <div className="sign__body">
                 <form>
                   <TextField
-                    //   helperText="Please enter your name"
+                    helperText={errors.email?.state && errors.email?.msg}
                     id="demo-helper-text-aligned"
                     label="Email"
                     type="email"
                     className="input"
+                    error={errors.email?.state ? true : false}
                     value={userdeltails.email}
                     onChange={(e) =>
                       setuserdeltails({
@@ -86,11 +119,13 @@ const Signin = () => {
                     }
                   />
                   <TextField
+                    helperText={errors.password?.state && errors.password?.msg}
                     id="demo-helper-text-aligned-no-helper"
                     label="Password"
                     type={showpassword ? "text" : "password"}
                     className="input"
-                    value={userdeltails.password}
+                    value={userdeltails?.password}
+                    error={errors.password?.state ? true : false}
                     onChange={(e) =>
                       setuserdeltails({
                         ...userdeltails,
