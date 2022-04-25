@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import Home from "./Home";
+import Home from "./pages/home/Home";
 import Signin from "./components/signin/Signin";
 import Loading from "./components/Loading/Loading";
 import { RandomPageLoadingTime } from "./helperFuntiions/RamdomLoadingTimeing";
