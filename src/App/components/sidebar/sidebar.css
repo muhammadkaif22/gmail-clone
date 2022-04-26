@@ -72,13 +72,13 @@
 .sidebarr__option {
   width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   cursor: pointer;
   user-select: none;
   padding: 6px 25px;
   border: none;
   border-radius: 0px 70px 70px 0;
-  gap: 17px;
 }
 .sidebarr__option:hover {
   background: var(--LightWhite);
@@ -87,15 +87,24 @@
 .sidebarr__option.active {
   background: var(--DarkLightWhite);
 }
-.sidebarr__option > .icon {
+.sidebarr__option > span {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+.sidebarr__option > span .icon {
   font-size: 1.2rem;
   color: var(--LightBlack);
 }
-.sidebarr__option > span {
+.sidebarr__option > span p {
   font-size: 0.9rem;
   font-weight: 600;
   text-transform: capitalize;
   color: var(--LightBlack);
+}
+.sidebarr__option > h5 {
+  color: var(--red);
+  font-weight: 700;
 }
 
 /* active classes */
