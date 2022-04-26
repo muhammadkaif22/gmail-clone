@@ -1,20 +1,29 @@
 import React from "react";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import SettingsIcon from "@mui/icons-material/Settings";
-import AppsIcon from "@mui/icons-material/Apps";
-import Avatar from "@mui/material/Avatar";
-import Badge from "@mui/material/Badge";
-import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
-import PersonAddAlt1OutlinedIcon from "@mui/icons-material/PersonAddAlt1Outlined";
 
-import Box from "@mui/material/Box";
-import Menu from "@mui/material/Menu";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
+import {
+  Search,
+  HelpOutline,
+  Settings,
+  Apps,
+  CameraAltOutlined,
+  PersonAddAlt1Outlined,
+} from "@mui/icons-material";
+
+import {
+  Avatar,
+  Badge,
+  Box,
+  Menu,
+  Divider,
+  IconButton,
+  Tooltip,
+  Button,
+} from "@mui/material";
+
+import { useDispatch } from "react-redux";
+import { OpenAndCloseSidebar } from "../../Redux/features/AllGlobalStates";
 
 import { auth } from "../../backend/firebase/config";
 import { selectUser } from "../../Redux/features/UserSilce";
@@ -22,10 +31,11 @@ import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 
 import "./header.css";
-import { Button } from "@mui/material";
 
 const Header = () => {
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -40,7 +50,10 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__left">
-        <IconButton className="icon">
+        <IconButton
+          className="icon"
+          onClick={() => dispatch(OpenAndCloseSidebar())}
+        >
           <MenuIcon />
         </IconButton>
 
@@ -52,7 +65,7 @@ const Header = () => {
       <div className="header__center">
         <form>
           <IconButton className="icon">
-            <SearchIcon />
+            <Search />
           </IconButton>
 
           <input placeholder="Search Mail" />
@@ -61,15 +74,15 @@ const Header = () => {
 
       <div className="header__right">
         <IconButton className="icon">
-          <HelpOutlineIcon />
+          <HelpOutline />
         </IconButton>
 
         <IconButton className="icon">
-          <SettingsIcon />
+          <Settings />
         </IconButton>
 
         <IconButton className="icon">
-          <AppsIcon />
+          <Apps />
         </IconButton>
 
         <>
@@ -126,7 +139,7 @@ const Header = () => {
                   }}
                   badgeContent={
                     <div className="menu__badge">
-                      <CameraAltOutlinedIcon className="icon" />
+                      <CameraAltOutlined className="icon" />
                     </div>
                   }
                 >
@@ -148,7 +161,7 @@ const Header = () => {
               <Divider />
 
               <div className="menu__addAccount">
-                <PersonAddAlt1OutlinedIcon className="icon" />
+                <PersonAddAlt1Outlined className="icon" />
                 <p>Add another account</p>
               </div>
 

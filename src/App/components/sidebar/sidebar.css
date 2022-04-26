@@ -1,0 +1,182 @@
+.sidebar {
+  width: 22%;
+  height: 100vh;
+  padding: 10px 0%;
+  transition: 0.2s ease-out;
+}
+
+.sidebar.active {
+  width: 6%;
+  transition: 0.2s ease-in;
+}
+
+.sidebar__top {
+  width: 100%;
+  margin-left: 10px;
+}
+
+.sidebar__composeBtn {
+  width: 54%;
+  height: 50px;
+  padding: 0 4%;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 70px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+  transition: all 0.08s linear, min-width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--White);
+}
+.sidebar__composeBtn:hover {
+  background: var(--SamiWhite-x2);
+  box-shadow: 0 1px 17px 0px rgb(60 64 67 / 30%),
+    0 1px 3px 1px rgb(60 64 67 / 10%);
+}
+
+.sidebar__composeBtn > img {
+  width: 32px;
+  height: 32px;
+}
+.sidebar__composeBtn > span {
+  flex: 1;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--LightBlack);
+}
+
+/* active classes */
+
+.sidebar.active .sidebar__composeBtn {
+  width: 50px;
+  border-radius: 50%;
+  justify-content: center;
+  transition: all 0.08s linear, min-width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar.active .sidebar__composeBtn > span {
+  display: none;
+}
+
+.sidebar__optionsContainer {
+  width: 100%;
+  height: 240px;
+  margin-top: 10px;
+  padding: 5px 1%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.sidebarr__option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  padding: 6px 25px;
+  border: none;
+  border-radius: 0px 70px 70px 0;
+  gap: 17px;
+}
+.sidebarr__option:hover {
+  background: var(--LightWhite);
+}
+
+.sidebarr__option.active {
+  background: var(--DarkLightWhite);
+}
+.sidebarr__option > .icon {
+  font-size: 1.2rem;
+  color: var(--LightBlack);
+}
+.sidebarr__option > span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--LightBlack);
+}
+
+/* active classes */
+
+.sidebar.active .sidebarr__option > span {
+  display: none;
+}
+
+.sidebar__meetingCotainer {
+  padding: 8px 0;
+  border-top: 1px solid rgba(95, 95, 95, 0.13);
+  border-bottom: 1px solid rgba(95, 95, 95, 0.13);
+}
+
+.sidebar__meetingCotainer > h4 {
+  font-size: 0.9rem;
+  color: var(--LightBlack);
+  font-weight: 600;
+  padding: 0 25px;
+}
+
+.sidebar__meetingoptions {
+  margin-top: 7px;
+  width: 100%;
+}
+
+.sidebar__meetingoptions > .sidebar__option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  padding: 6px 25px;
+  border: none;
+  border-radius: 0px 70px 70px 0;
+  gap: 17px;
+}
+.sidebar__meetingoptions > .sidebar__option:hover {
+  background: var(--LightWhite);
+}
+
+.sidebar__meetingoptions > .sidebar__option > .icon {
+  font-size: 1.3rem;
+  color: var(--LightBlack);
+}
+
+.sidebar__meetingoptions > .sidebar__option > span {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--LightBlack);
+}
+
+.sidebar__hangoutsContainer {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(95, 95, 95, 0.13);
+}
+
+.sidebar__hangoutsContainer > h4 {
+  font-size: 0.9rem;
+  color: var(--LightBlack);
+  font-weight: 600;
+  padding: 0 25px;
+}
+
+.hangoutsContainer__userprofile {
+  display: flex;
+  padding: 5px 7px 0 25px;
+  justify-content: space-between;
+  align-items: center;
+}
+.hangoutsContainer__userprofile > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.hangoutsContainer__userprofile > span .userprofile__profile {
+  width: 36px;
+  height: 36px;
+}
+.hangoutsContainer__userprofile > span p {
+  font-size: 0.8rem;
+  color: var(--LightFontBlack);
+  font-weight: 400;
+}
