@@ -69,6 +69,22 @@
   overflow-x: hidden;
 }
 
+.sidebar__optionsContainer::-webkit-scrollbar {
+  width: 10px;
+}
+.sidebar__optionsContainer::-webkit-scrollbar-thumb {
+  background: rgba(148, 148, 148, 1);
+
+  display: none;
+}
+.sidebar__optionsContainer::-webkit-scrollbar-thumb:hover {
+  background: #637589 !important;
+}
+
+.sidebar__optionsContainer:hover::-webkit-scrollbar-thumb {
+  display: block !important;
+}
+
 .sidebarr__option {
   width: 100%;
   display: flex;
@@ -109,7 +125,7 @@
 
 /* active classes */
 
-.sidebar.active .sidebarr__option > span {
+.sidebar.active .sidebarr__option > span p {
   display: none;
 }
 
@@ -157,6 +173,11 @@
   color: var(--LightBlack);
 }
 
+/* active classes */
+.sidebar.active .sidebar__meetingoptions > .sidebar__option > span {
+  display: none;
+}
+
 .sidebar__hangoutsContainer {
   padding: 8px 0;
   border-bottom: 1px solid rgba(95, 95, 95, 0.13);
@@ -188,4 +209,12 @@
   font-size: 0.8rem;
   color: var(--LightFontBlack);
   font-weight: 400;
+}
+
+/* active classes */
+.sidebar.active .hangoutsContainer__userprofile > span p {
+  display: none;
+}
+.sidebar.active .hangoutsContainer__userprofile .icon {
+  display: none;
 }
