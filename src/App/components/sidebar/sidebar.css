@@ -103,6 +103,9 @@
 .sidebarr__option.active {
   background: var(--DarkLightWhite);
 }
+.sidebarr__option.active-inbox {
+  background: var(--LightRed);
+}
 .sidebarr__option > span {
   display: flex;
   align-items: center;

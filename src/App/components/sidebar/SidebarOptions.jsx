@@ -7,35 +7,110 @@ import {
   InsertDriveFile,
   Send,
 } from "@mui/icons-material";
+import {
+  selectCurrentActiveMailOption,
+  setCurrentActiveMailOption,
+} from "../../Redux/features/AllGlobalStates";
+import { useSelector, useDispatch } from "react-redux";
 
 const SidebarOptions = () => {
+  const ActiveOption = useSelector(selectCurrentActiveMailOption);
+  const dispatch = useDispatch();
+
   return (
     <>
-      <Options Icon={Inbox} Name={"inbox"} isActive={true} unreadMsg={400} />
-      <Options Icon={Send} Name={"send"} isActive={false} />
-      <Options Icon={Star} Name={"starred"} isActive={false} />
-      <Options Icon={WatchLater} Name={"snoozed"} isActive={false} />
-      <Options Icon={InsertDriveFile} Name={"drafts"} isActive={false} />
-      <Options Icon={Inbox} Name={"inbox"} isActive={false} />
-      <Options Icon={Inbox} Name={"inbox"} isActive={false} />
-      <Options Icon={Inbox} Name={"inbox"} isActive={false} />
-      <Options Icon={Inbox} Name={"inbox"} isActive={false} />
-      <Options Icon={Inbox} Name={"inbox"} isActive={false} />
-      <Options Icon={Inbox} Name={"inbox"} isActive={false} />
+      <div
+        className={`sidebarr__option ${
+          ActiveOption == "inbox" && "active-inbox"
+        }`}
+        onClick={() => dispatch(setCurrentActiveMailOption("inbox"))}
+      >
+        <span>
+          <Inbox className="icon" />
+          <p>inbox</p>
+        </span>
+        <h5>500+</h5>
+      </div>
+
+      <div
+        className={`sidebarr__option ${ActiveOption == "send" && "active"}`}
+        onClick={() => dispatch(setCurrentActiveMailOption("send"))}
+      >
+        <span>
+          <Send className="icon" />
+          <p>Send</p>
+        </span>
+      </div>
+
+      <div className="sidebarr__option">
+        <span>
+          <Star className="icon" />
+          <p>starred</p>
+        </span>
+      </div>
+
+      <div className="sidebarr__option">
+        <span>
+          <WatchLater className="icon" />
+          <p>snoozed</p>
+        </span>
+      </div>
+
+      <div className="sidebarr__option">
+        <span>
+          <InsertDriveFile className="icon" />
+          <p>drafts</p>
+        </span>
+      </div>
+
+      <div className="sidebarr__option">
+        <span>
+          <Inbox className="icon" />
+          <p>inbox</p>
+        </span>
+      </div>
+
+      <div className="sidebarr__option">
+        <span>
+          <Inbox className="icon" />
+          <p>inbox</p>
+        </span>
+      </div>
+
+      <div className="sidebarr__option">
+        <span>
+          <Inbox className="icon" />
+          <p>inbox</p>
+        </span>
+      </div>
+
+      <div className="sidebarr__option">
+        <span>
+          <Inbox className="icon" />
+          <p>inbox</p>
+        </span>
+      </div>
+
+      <div className="sidebarr__option">
+        <span>
+          <Inbox className="icon" />
+          <p>inbox</p>
+        </span>
+      </div>
+      <div className="sidebarr__option">
+        <span>
+          <Inbox className="icon" />
+          <p>inbox</p>
+        </span>
+      </div>
+
+      <div className="sidebarr__option">
+        <span>
+          <Inbox className="icon" />
+          <p>inbox</p>
+        </span>
+      </div>
     </>
-  );
-};
-
-const Options = ({ Icon, Name, isActive, unreadMsg }) => {
-  return (
-    <div className={`sidebarr__option ${isActive && "active"}`}>
-      <span>
-        <Icon className="icon" />
-        <p>{Name}</p>
-      </span>
-
-      <h5>{unreadMsg}</h5>
-    </div>
   );
 };
 

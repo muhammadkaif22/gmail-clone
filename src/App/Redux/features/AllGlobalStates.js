@@ -4,6 +4,7 @@ const initialState = {
   opensignup: false,
   signinLoading: false,
   opensidebar: false,
+  CurrentActiveMailOption: "inbox",
 };
 
 export const GlobalSlice = createSlice({
@@ -25,6 +26,9 @@ export const GlobalSlice = createSlice({
     OpenAndCloseSidebar: (state, action) => {
       state.opensidebar = !state.opensidebar;
     },
+    setCurrentActiveMailOption: (state, action) => {
+      state.CurrentActiveMailOption = action.payload;
+    },
   },
 });
 
@@ -34,10 +38,13 @@ export const {
   setloadingTrue,
   setloadingFalse,
   OpenAndCloseSidebar,
+  setCurrentActiveMailOption,
 } = GlobalSlice.actions;
 
 export const selectOpenSignupState = (state) => state.GlobalStates.opensignup;
 export const selectLoadingState = (state) => state.GlobalStates.signinLoading;
 export const selectOpensidebarState = (state) => state.GlobalStates.opensidebar;
+export const selectCurrentActiveMailOption = (state) =>
+  state.GlobalStates.CurrentActiveMailOption;
 
 export default GlobalSlice.reducer;
