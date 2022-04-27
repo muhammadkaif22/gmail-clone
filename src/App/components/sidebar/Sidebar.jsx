@@ -9,11 +9,13 @@ import {
   selectOpensidebarState,
   OpenAndCloseopenComposeMail,
 } from "../../Redux/features/AllGlobalStates";
+import { selectUser } from "../../Redux/features/UserSilce";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./sidebar.css";
 
 const Sidebar = () => {
+  const user = useSelector(selectUser);
   const openSidebar = useSelector(selectOpensidebarState);
   const dispatch = useDispatch();
 
@@ -54,12 +56,12 @@ const Sidebar = () => {
         <div className="hangoutsContainer__userprofile">
           <span>
             <Avatar
-              alt="Remy Sharp"
-              src="/broken-image.jpg"
+              alt={user?.displayName}
+              src={user?.photoURL}
               className="userprofile__profile"
               style={{ cursor: "pointer" }}
             />
-            <p>hunter</p>
+            <p>{user?.displayName}</p>
           </span>
 
           <IconButton className="icon">
