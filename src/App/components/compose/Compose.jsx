@@ -67,7 +67,7 @@ const Compose = () => {
           options={options}
           sx={{ width: 300 }}
           renderInput={(params) => (
-            <TextField {...params} label="Controllable" />
+            <TextField {...params} label="Select mail categroy" />
           )}
         />
       </div>

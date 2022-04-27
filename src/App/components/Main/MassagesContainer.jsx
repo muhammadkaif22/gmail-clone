@@ -1,5 +1,7 @@
 import React from "react";
 
+import Message from "./Message";
+
 import { Inbox, People, LocalOffer, MobileFriendly } from "@mui/icons-material";
 
 import {
@@ -51,6 +53,11 @@ const MassagesContainer = () => {
           <p>Updates</p>
           <span></span>
         </div>
+      </div>
+
+      {/* messages */}
+      <div className="main__messages">
+        <Message />
       </div>
     </div>
   );
