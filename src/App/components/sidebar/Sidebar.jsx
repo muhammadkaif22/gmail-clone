@@ -3,23 +3,30 @@ import React from "react";
 import SidebarOptions from "./SidebarOptions";
 
 import { Videocam, Keyboard, Add } from "@mui/icons-material";
-import { Avatar, IconButton } from "@mui/material";
+import { Avatar, IconButton, Button } from "@mui/material";
 
-import { selectOpensidebarState } from "../../Redux/features/AllGlobalStates";
-import { useSelector } from "react-redux";
+import {
+  selectOpensidebarState,
+  OpenAndCloseopenComposeMail,
+} from "../../Redux/features/AllGlobalStates";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./sidebar.css";
 
 const Sidebar = () => {
   const openSidebar = useSelector(selectOpensidebarState);
+  const dispatch = useDispatch();
 
   return (
     <div className={`sidebar ${openSidebar && "active"}`}>
       <div className="sidebar__top">
-        <button className="sidebar__composeBtn">
+        <Button
+          className="sidebar__composeBtn"
+          onClick={() => dispatch(OpenAndCloseopenComposeMail())}
+        >
           <img src="https://www.gstatic.com/images/icons/material/colored_icons/2x/create_32dp.png" />
           <span>compose</span>
-        </button>
+        </Button>
       </div>
 
       <div className="sidebar__optionsContainer">

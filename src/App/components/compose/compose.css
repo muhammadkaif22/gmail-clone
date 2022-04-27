@@ -1,0 +1,80 @@
+.compose {
+  width: 510px;
+  height: 460px;
+  position: absolute;
+  right: 5%;
+  transform: translateY(10px);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0px 8px 10px 1px rgb(0 0 0 / 14%),
+    0px 3px 14px 2px rgb(0 0 0 / 12%), 0px 5px 5px -3px rgb(0 0 0 / 20%);
+  background: #fff;
+}
+.compose__top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--SamiBlack);
+  border: none;
+  border-radius: 8px 8px 0 0;
+  padding: 5px 3%;
+  user-select: none;
+}
+.compose__top > span {
+  color: var(--White);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.compose__top .closebtn {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.compose__top .closebtn:hover {
+  background: rgba(250, 250, 251, 0.5);
+}
+.closebtn > .icon {
+  width: 80%;
+  color: var(--SamiWhite);
+}
+
+/* body */
+.compose__body {
+  width: 100%;
+}
+.compose__inputFld {
+  width: 100%;
+}
+.compose__inputFld > input {
+  width: 100%;
+  border-bottom: 1px solid rgba(95, 95, 95, 0.13);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 7px 4.2%;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--LightFontBlack);
+}
+.compose__inputFld > input::placeholder {
+  color: var(--LightBlack);
+  font-size: 0.9rem;
+  font-weight: 200;
+  text-transform: capitalize;
+}
+.compose__inputFld > .textarea {
+  width: 100%;
+  height: 210px;
+  border: none;
+  resize: none;
+  padding: 7px 4.2%;
+}
+.compose__footer {
+  margin-top: 88px;
+  padding: 0 2%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
