@@ -44,4 +44,100 @@
   width: 100%;
   display: flex;
   align-items: center;
+  gap: 10px;
+}
+.MessageContainer__tabs > .tab {
+  width: 25%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  padding: 0 10px;
+  border: none;
+  border-radius: 4px;
+  gap: 17px;
+  transition: 0.2s ease-in-out;
+}
+.MessageContainer__tabs > .tab::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 3px;
+  border: none;
+  border-radius: 70px;
+}
+
+.MessageContainer__tabs > .tab:hover {
+  background: var(--SamiWhite);
+}
+.MessageContainer__tabs > .tab:hover .icon {
+  color: var(--Black);
+}
+
+.tab > .icon {
+  font-size: 1.3rem;
+  color: var(--LightBlack);
+}
+.tab > p {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--LightBlack);
+}
+
+/* active classes */
+
+/* primary */
+.MessageContainer__tabs > .tab.primary > .icon {
+  color: var(--red);
+}
+.MessageContainer__tabs > .tab.primary > p {
+  color: var(--red);
+}
+
+.MessageContainer__tabs > .tab.primary::before {
+  background: var(--red);
+}
+
+/* social */
+
+.MessageContainer__tabs > .tab.social > .icon {
+  color: var(--green);
+}
+.MessageContainer__tabs > .tab.social > p {
+  color: var(--green);
+}
+
+.MessageContainer__tabs > .tab.social::before {
+  background: var(--green);
+}
+
+/* Promotions */
+
+.MessageContainer__tabs > .tab.promotions > .icon {
+  color: var(--blue);
+}
+.MessageContainer__tabs > .tab.promotions > p {
+  color: var(--blue);
+}
+
+.MessageContainer__tabs > .tab.promotions::before {
+  background: var(--blue);
+}
+
+/* Updates */
+
+.MessageContainer__tabs > .tab.updates > .icon {
+  color: var(--green);
+}
+.MessageContainer__tabs > .tab.updates > p {
+  color: var(--green);
+}
+
+.MessageContainer__tabs > .tab.updates::before {
+  background: var(--green);
 }
