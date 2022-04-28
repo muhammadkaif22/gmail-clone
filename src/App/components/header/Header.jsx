@@ -22,12 +22,14 @@ import {
   Button,
 } from "@mui/material";
 
-import { useDispatch } from "react-redux";
-import { OpenAndCloseSidebar } from "../../Redux/features/AllGlobalStates";
+import {
+  OpenAndCloseSidebar,
+  OpenAndCloseopenOpenAddPhotoURL,
+} from "../../Redux/features/AllGlobalStates";
 
 import { auth } from "../../backend/firebase/config";
 import { selectUser } from "../../Redux/features/UserSilce";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { signOut } from "firebase/auth";
 
 import "./header.css";
@@ -142,6 +144,7 @@ const Header = () => {
                       <CameraAltOutlined className="icon" />
                     </div>
                   }
+                  onClick={() => dispatch(OpenAndCloseopenOpenAddPhotoURL())}
                 >
                   <Avatar
                     style={{ cursor: "pointer" }}

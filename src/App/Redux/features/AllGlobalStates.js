@@ -7,6 +7,7 @@ const initialState = {
   CurrentActiveMailOption: "inbox",
   openComposeMail: false,
   currentMailcategroy: "primary",
+  openAddPhotoURL: false,
 };
 
 export const GlobalSlice = createSlice({
@@ -37,6 +38,9 @@ export const GlobalSlice = createSlice({
     setCurrentMailcategroy: (state, action) => {
       state.currentMailcategroy = action.payload;
     },
+    OpenAndCloseopenOpenAddPhotoURL: (state, action) => {
+      state.openAddPhotoURL = !state.openAddPhotoURL;
+    },
   },
 });
 
@@ -49,6 +53,7 @@ export const {
   setCurrentActiveMailOption,
   OpenAndCloseopenComposeMail,
   setCurrentMailcategroy,
+  OpenAndCloseopenOpenAddPhotoURL,
 } = GlobalSlice.actions;
 
 export const selectOpenSignupState = (state) => state.GlobalStates.opensignup;
@@ -64,5 +69,8 @@ export const selectComposeMail = (state) => state.GlobalStates.openComposeMail;
 
 export const selectCurrentMailcategroy = (state) =>
   state.GlobalStates.currentMailcategroy;
+
+export const selectOpenAddPhotoURL = (state) =>
+  state.GlobalStates.openAddPhotoURL;
 
 export default GlobalSlice.reducer;
