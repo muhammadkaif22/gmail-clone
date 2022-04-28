@@ -1,19 +1,48 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
 import Message from "./Message";
 
 import { Inbox, People, LocalOffer, MobileFriendly } from "@mui/icons-material";
+
+import { selectUser } from "../../Redux/features/UserSilce";
 
 import {
   selectCurrentMailcategroy,
   setCurrentMailcategroy,
 } from "../../Redux/features/AllGlobalStates";
 
+import {
+  selectRecivedMails,
+  selectonScreenMail,
+  setRecivedMails,
+  setonScreenMail,
+} from "../../Redux/features/MailsSlice";
+
+import { db } from "../../backend/firebase/config";
+import { collection, orderBy, query, onSnapshot } from "firebase/firestore";
+
 import { useSelector, useDispatch } from "react-redux";
 
 const MassagesContainer = () => {
+  const user = useSelector(selectUser);
   const currentCategroy = useSelector(selectCurrentMailcategroy);
+  const recivedMails = useSelector(selectRecivedMails);
+  const onScreenMail = useSelector(selectonScreenMail);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const collectionRef = collection(db, "RecivedMails", user?.email, "mails");
+    const q = query(collectionRef);
+    const display = onSnapshot(q, (snapshot) => {
+      dispatch(setRecivedMails(snapshot.docs.map((data) => data.data())));
+    });
+  }, [recivedMails]);
+
+  useEffect(() => {
+    dispatch(setonScreenMail(recivedMails));
+  }, [recivedMails]);
+
+  console.log("this is onscreen mail", onScreenMail);
 
   return (
     <div className="main__MessageContainer">
@@ -57,48 +86,17 @@ const MassagesContainer = () => {
 
       {/* messages */}
       <div className="main__messages">
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
+        {onScreenMail.map((data, index) => {
+          return (
+            <Message
+              key={index}
+              id={data?.id}
+              body={data?.body}
+              subject={data?.subject}
+              username={data?.senderName}
+            />
+          );
+        })}
       </div>
     </div>
   );

@@ -33,8 +33,6 @@ const App = () => {
     return () => unsub();
   }, [user]);
 
-  console.log(user);
-
   return (
     <div className="App">
       {user ? <Home /> : PageLoading ? <Loading /> : <Signin />}

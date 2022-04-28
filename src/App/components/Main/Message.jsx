@@ -5,7 +5,7 @@ import { StarBorder, GppMaybeOutlined } from "@mui/icons-material";
 
 import "./message.css";
 
-const Message = () => {
+const Message = ({ id, body, subject, username }) => {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   return (
@@ -25,14 +25,11 @@ const Message = () => {
           </IconButton>
         </Tooltip>
 
-        <span className="message__username">kaif ali</span>
+        <span className="message__username">{username}</span>
       </div>
       <div className="message__center">
-        <h5>learn english from home</h5>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur dolor, sit amet consecteturt
-          amet consectetur dolor, sit amet consectetur
-        </p>
+        <h5>{subject}</h5>
+        <p>{body}</p>
       </div>
       <div className="message__right">
         <h4>11:02 pm</h4>

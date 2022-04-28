@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Close } from "@mui/icons-material";
 import { OpenAndCloseopenComposeMail } from "../../Redux/features/AllGlobalStates";
-import { useDispatch } from "react-redux";
+import { selectUser } from "../../Redux/features/UserSilce";
+import { useSelector, useDispatch } from "react-redux";
 import { Button, TextField, Autocomplete } from "@mui/material";
+import { v4 as uuidv4 } from "uuid";
+
+import { db } from "../../backend/firebase/config";
+import { doc, setDoc } from "firebase/firestore";
 
 import "./compose.css";
 
 const Compose = () => {
+  const user = useSelector(selectUser);
   const [options, setoptions] = useState([
     "Primary",
     "Social",
@@ -16,9 +22,63 @@ const Compose = () => {
   ]);
   const [inputValue, setInputValue] = React.useState("");
   const [categroy, setcategroy] = useState(options[0]);
+  const [userDetails, setuserDetails] = useState({
+    recipients: "",
+    subject: "",
+    body: "",
+  });
+  const [id, setid] = useState(null);
   const dispatch = useDispatch();
 
-  console.log(categroy);
+  useEffect(() => {
+    setid(uuidv4());
+  }, []);
+
+  const createRamdomId = () => {
+    setid(uuidv4());
+  };
+
+  const SendMail = async () => {
+    createRamdomId();
+    dispatch(OpenAndCloseopenComposeMail());
+    try {
+      await setDoc(doc(db, "SendMails", user?.email, "mails", id), {
+        id: id,
+        categroy: categroy,
+        recipients: userDetails.recipients,
+        subject: userDetails.subject,
+        body: userDetails.body,
+        sender: user?.email,
+        senderName: user?.displayName,
+        read: true,
+      });
+
+      addRecivedMail();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  const addRecivedMail = async () => {
+    try {
+      await setDoc(
+        doc(db, "RecivedMails", userDetails.recipients, "mails", id),
+        {
+          id: id,
+          categroy: categroy,
+          recipients: userDetails.recipients,
+          subject: userDetails.subject,
+          body: userDetails.body,
+          sender: user?.email,
+          senderName: user?.displayName,
+          read: false,
+        }
+      );
+      alert("message send");
+    } catch (err) {
+      alert(err.message);
+    }
+  };
 
   return (
     <div className="compose">
@@ -35,13 +95,33 @@ const Compose = () => {
 
       <div className="compose__body">
         <div className="compose__inputFld">
-          <input type="text" placeholder="Recipients" />
+          <input
+            type="text"
+            placeholder="Recipients"
+            value={userDetails.recipients}
+            onChange={(e) =>
+              setuserDetails({ ...userDetails, recipients: e.target.value })
+            }
+          />
         </div>
         <div className="compose__inputFld">
-          <input type="text" placeholder="subject" />
+          <input
+            type="text"
+            placeholder="subject"
+            value={userDetails.subject}
+            onChange={(e) =>
+              setuserDetails({ ...userDetails, subject: e.target.value })
+            }
+          />
         </div>
         <div className="compose__inputFld">
-          <textarea className="textarea"></textarea>
+          <textarea
+            className="textarea"
+            value={userDetails.body}
+            onChange={(e) =>
+              setuserDetails({ ...userDetails, body: e.target.value })
+            }
+          ></textarea>
         </div>
       </div>
 
@@ -50,8 +130,9 @@ const Compose = () => {
           variant="contained"
           size="medium"
           style={{ textTransform: "capitalize" }}
+          onClick={SendMail}
         >
-          send{" "}
+          send
         </Button>
 
         <Autocomplete
