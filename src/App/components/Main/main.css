@@ -105,6 +105,31 @@
   color: var(--LightBlack);
 }
 
+.tab > .unreadMsg {
+  width: 50px;
+  height: 25px;
+  color: var(--White);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-align: center;
+  line-height: 25px;
+  border: none;
+  border-radius: 70px;
+  text-transform: capitalize;
+}
+.tab > .unreadMsg.primary {
+  background: var(--red);
+}
+.tab > .unreadMsg.social {
+  background: var(--green);
+}
+.tab > .unreadMsg.promotions {
+  background: var(--blue);
+}
+.tab > .unreadMsg.updates {
+  background: var(--green);
+}
+
 /* active classes */
 
 /* primary */
@@ -113,6 +138,9 @@
 }
 .MessageContainer__tabs > .tab.primary > p {
   color: var(--red);
+}
+.tab > span {
+  background: var(--red);
 }
 
 .MessageContainer__tabs > .tab.primary::before {

@@ -2,14 +2,44 @@ import React from "react";
 
 import { Checkbox, IconButton, Tooltip, Zoom } from "@mui/material";
 import { StarBorder, GppMaybeOutlined } from "@mui/icons-material";
+import { db } from "../../backend/firebase/config";
+import { updateDoc, doc } from "firebase/firestore";
 
 import "./message.css";
 
-const Message = ({ id, body, subject, username }) => {
+const Message = ({
+  id,
+  body,
+  subject,
+  username,
+  user,
+  readMassges,
+  activeMail,
+}) => {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
+  const ReadMsgFun = async () => {
+    try {
+      if (activeMail == "inbox") {
+        await updateDoc(doc(db, "RecivedMails", user?.email, "mails", id), {
+          read: true,
+        });
+      }
+      if (activeMail == "send") {
+        await updateDoc(doc(db, "SendMails", user?.email, "mails", id), {
+          read: true,
+        });
+      }
+    } catch (err) {
+      alert(err.Message);
+    }
+  };
+
   return (
-    <div className="message">
+    <div
+      className={`message ${readMassges && "Message_read"}`}
+      onClick={ReadMsgFun}
+    >
       <div className="message__left">
         <Checkbox {...label} />
 
