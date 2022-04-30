@@ -9,7 +9,7 @@ import {
   Forward,
 } from "@mui/icons-material";
 
-import { Avatar, Button, IconButton } from "@mui/material";
+import { Avatar, Button, IconButton, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -36,7 +36,7 @@ const ViewMail = () => {
   useEffect(() => {
     if (MailUrl) {
       const unsub = onSnapshot(
-        doc(db, "RecivedMails", MailUrl?.recipients, "mails", MailUrl.id),
+        doc(db, "RecivedMails", MailUrl?.recipients, "mails", MailUrl?.id),
         (data) => {
           setviewMailData(data.data());
         }
