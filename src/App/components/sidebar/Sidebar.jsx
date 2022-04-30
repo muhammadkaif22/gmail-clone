@@ -9,6 +9,7 @@ import {
   selectOpensidebarState,
   OpenAndCloseopenComposeMail,
 } from "../../Redux/features/AllGlobalStates";
+import { selectInboxTotalMails } from "../../Redux/features/MailsSlice";
 import { selectUser } from "../../Redux/features/UserSilce";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -17,6 +18,7 @@ import "./sidebar.css";
 const Sidebar = () => {
   const user = useSelector(selectUser);
   const openSidebar = useSelector(selectOpensidebarState);
+  const InboxTotalMails = useSelector(selectInboxTotalMails);
   const dispatch = useDispatch();
 
   return (
@@ -26,13 +28,16 @@ const Sidebar = () => {
           className="sidebar__composeBtn"
           onClick={() => dispatch(OpenAndCloseopenComposeMail())}
         >
-          <img src="https://www.gstatic.com/images/icons/material/colored_icons/2x/create_32dp.png" />
+          <img
+            src="https://www.gstatic.com/images/icons/material/colored_icons/2x/create_32dp.png"
+            alt="gmail"
+          />
           <span>compose</span>
         </Button>
       </div>
 
       <div className="sidebar__optionsContainer">
-        <SidebarOptions />
+        <SidebarOptions InboxMails={InboxTotalMails} />
       </div>
 
       <div className="sidebar__meetingCotainer">

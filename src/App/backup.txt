@@ -1,0 +1,20 @@
+   let primarymail = recivedMails.filter((e) => {
+  //       return e.categroy === "Primary";
+  //     });
+  //     dispatch(setTotalMails({ primarymails: primarymail.length }));
+
+  //     // let socialmail = totalMailindex.filter((e) => {
+  //     //   return e.categroy == "Social";
+  //     // });
+  //     // dispatch(setTotalMails({ socialmails: socialmail.length }));
+
+  //     // let promotionsmail = totalMailindex.filter((e) => {
+  //     //   return e.categroy == "Promotions";
+  //     // });
+  //     // dispatch(setTotalMails({ promotionsmails: promotionsmail.length }));
+
+  //     // let updatemail = totalMailindex.filter((e) => {
+  //     //   return e.categroy == "Updates";
+  //     // });
+  //     // dispatch(setTotalMails({ updatesmails: updatemail.length }));
+  //   }

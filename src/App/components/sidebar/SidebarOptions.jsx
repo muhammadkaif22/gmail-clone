@@ -13,7 +13,7 @@ import {
 } from "../../Redux/features/AllGlobalStates";
 import { useSelector, useDispatch } from "react-redux";
 
-const SidebarOptions = () => {
+const SidebarOptions = ({ InboxMails }) => {
   const ActiveOption = useSelector(selectCurrentActiveMailOption);
   const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ const SidebarOptions = () => {
           <Inbox className="icon" />
           <p>inbox</p>
         </span>
-        <h5>500+</h5>
+        <h5>{InboxMails}</h5>
       </div>
 
       <div

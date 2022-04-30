@@ -9,15 +9,20 @@ import {
 } from "@mui/icons-material";
 
 import { selectOpensidebarState } from "../../Redux/features/AllGlobalStates";
+import { selectRecivedMails } from "../../Redux/features/MailsSlice";
+import { useSelector } from "react-redux";
 
 import MassagesContainer from "./MassagesContainer";
 
 import "./main.css";
 
 const Main = () => {
+  const SidebarVal = useSelector(selectRecivedMails);
+  const recivedMails = useSelector(selectRecivedMails);
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
   return (
-    <div className={`main ${selectOpensidebarState && "active"}`}>
+    <div className={`main ${SidebarVal && "active"}`}>
       <div className="main__header">
         <div className="header__left">
           <Checkbox {...label} />
@@ -30,7 +35,7 @@ const Main = () => {
           </IconButton>
         </div>
         <div className="header__right">
-          <span>100</span>
+          <span>{recivedMails.length}</span>
 
           <Tooltip title="Newer" placement="bottom">
             <IconButton className="icon">

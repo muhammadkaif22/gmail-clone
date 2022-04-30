@@ -17,6 +17,7 @@ import {
   selectonScreenMail,
   setRecivedMails,
   setonScreenMail,
+  setInboxTotalMails,
 } from "../../Redux/features/MailsSlice";
 
 import { db } from "../../backend/firebase/config";
@@ -30,6 +31,13 @@ const MassagesContainer = () => {
   const recivedMails = useSelector(selectRecivedMails);
   const onScreenMail = useSelector(selectonScreenMail);
   const activeMail = useSelector(selectCurrentActiveMailOption);
+
+  // total unread mails
+  const [primarymails, setprimarymails] = useState(0);
+  const [socialmails, setsocialmails] = useState(0);
+  const [promotionsmails, setpromotionsmails] = useState(0);
+  const [updatesmails, setupdatesmails] = useState(0);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,45 +66,110 @@ const MassagesContainer = () => {
     dispatch(setonScreenMail(recivedMails));
   }, [recivedMails]);
 
+  useEffect(() => {
+    if (currentCategroy == "primary") {
+      let sortedMails = recivedMails.filter((e) => {
+        return e.categroy == "Primary";
+      });
+
+      dispatch(setonScreenMail(sortedMails));
+    }
+
+    if (currentCategroy == "social") {
+      let sortedMails = recivedMails.filter((e) => {
+        return e.categroy == "Social";
+      });
+
+      dispatch(setonScreenMail(sortedMails));
+    }
+
+    if (currentCategroy == "promotions") {
+      let sortedMails = recivedMails.filter((e) => {
+        return e.categroy == "Promotions";
+      });
+
+      dispatch(setonScreenMail(sortedMails));
+    }
+
+    if (currentCategroy == "updates") {
+      let sortedMails = recivedMails.filter((e) => {
+        return e.categroy == "Updates";
+      });
+
+      dispatch(setonScreenMail(sortedMails));
+    }
+  }, [recivedMails, currentCategroy]);
+
+  useEffect(() => {
+    if (activeMail == "inbox") {
+      let totalMailindex = recivedMails.filter((e) => {
+        return e.read === false;
+      });
+      dispatch(setInboxTotalMails(totalMailindex.length));
+
+      let primarymail = totalMailindex.filter((e) => {
+        return e.categroy === "Primary";
+      });
+      setprimarymails(primarymail.length);
+
+      let socialmail = totalMailindex.filter((e) => {
+        return e.categroy === "Social";
+      });
+      setsocialmails(socialmail.length);
+
+      let promotionsmail = totalMailindex.filter((e) => {
+        return e.categroy == "Promotions";
+      });
+      setpromotionsmails(promotionsmail.length);
+
+      let updatemail = totalMailindex.filter((e) => {
+        return e.categroy == "Updates";
+      });
+      setupdatesmails(updatemail.length);
+    }
+  }, [recivedMails]);
+
   return (
     <div className="main__MessageContainer">
-      {activeMail == "inbox" && (
+      {activeMail === "inbox" && (
         <div className="MessageContainer__tabs">
           {/* tabs */}
           <div
-            className={`tab ${currentCategroy == "primary" && "primary"}`}
+            className={`tab ${currentCategroy === "primary" && "primary"}`}
             onClick={() => dispatch(setCurrentMailcategroy("primary"))}
           >
             <Inbox className="icon" />
             <p>Primary</p>
-            <span className="unreadMsg primary">5 new</span>
+            <span className="unreadMsg primary">{primarymails} new</span>
           </div>
 
           <div
-            className={`tab ${currentCategroy == "social" && "social"}`}
+            className={`tab ${currentCategroy === "social" && "social"}`}
             onClick={() => dispatch(setCurrentMailcategroy("social"))}
           >
             <People className="icon" />
             <p>Social</p>
-            <span className="unreadMsg social">5 new</span>
+            <span className="unreadMsg social">{socialmails} new</span>
           </div>
 
           <div
-            className={`tab ${currentCategroy == "promotions" && "promotions"}`}
+            className={`tab ${
+              currentCategroy === "promotions" && "promotions"
+            }`}
             onClick={() => dispatch(setCurrentMailcategroy("promotions"))}
           >
             <LocalOffer className="icon" />
             <p>Promotions</p>
-            <span className="unreadMsg promotions">5 new</span>
+            <span className="unreadMsg promotions">{promotionsmails} new</span>
           </div>
 
           <div
-            className={`tab ${currentCategroy == "updates" && "updates"}`}
+            className={`tab ${currentCategroy === "updates" && "updates"}`}
             onClick={() => dispatch(setCurrentMailcategroy("updates"))}
           >
             <MobileFriendly className="icon" />
             <p>Updates</p>
-            <span className="unreadMsg updates">5 new</span>
+            <span className="unreadMsg updates">{updatesmails} new</span>
           </div>
         </div>
       )}
