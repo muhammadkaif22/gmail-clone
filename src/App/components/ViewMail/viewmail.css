@@ -58,9 +58,12 @@
   user-select: none;
 }
 .body__mainContent {
+  width: 95%;
   padding: 10px 5%;
+  overflow: hidden;
 }
-.body__mainContent > p {
+.body__mainContent > .mainContent__content {
+  width: 100%;
   font-size: 0.9rem;
   line-height: 25px;
   font-weight: 400;

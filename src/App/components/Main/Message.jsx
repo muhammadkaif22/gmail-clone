@@ -4,25 +4,30 @@ import { Checkbox, IconButton, Tooltip, Zoom } from "@mui/material";
 import { StarBorder, GppMaybeOutlined } from "@mui/icons-material";
 import { db } from "../../backend/firebase/config";
 import { updateDoc, doc } from "firebase/firestore";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { setMailURL } from "../../Redux/features/MailsSlice";
+import { useDispatch } from "react-redux";
 
 import "./message.css";
 
 const Message = ({
   id,
+  user,
   body,
   subject,
-  username,
-  user,
+  senderName,
+  recipients,
   readMassges,
   activeMail,
   time,
 }) => {
   const navigate = useNavigate();
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  const dispatch = useDispatch();
 
   const ReadMsgFun = async () => {
-    navigate("/viewmail");
+    navigate(id);
+    dispatch(setMailURL({ id, recipients }));
     try {
       if (activeMail == "inbox") {
         await updateDoc(doc(db, "RecivedMails", user?.email, "mails", id), {
@@ -59,7 +64,7 @@ const Message = ({
           </IconButton>
         </Tooltip>
 
-        <span className="message__username">{username}</span>
+        <span className="message__username">{senderName}</span>
       </div>
       <div className="message__center">
         <h5>{subject}</h5>

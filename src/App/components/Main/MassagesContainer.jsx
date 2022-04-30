@@ -53,6 +53,9 @@ const MassagesContainer = () => {
         }
       );
     }
+  }, [recivedMails]);
+
+  useEffect(() => {
     if (activeMail == "send") {
       onSnapshot(
         query(
@@ -190,7 +193,8 @@ const MassagesContainer = () => {
               id={data?.id}
               body={data?.body}
               subject={data?.subject}
-              username={data?.senderName}
+              senderName={data?.senderName}
+              recipients={data?.recipients}
               readMassges={data?.read}
               activeMail={activeMail}
               time={data?.time}

@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
@@ -12,6 +12,7 @@ import {
   selectComposeMail,
   selectOpenAddPhotoURL,
 } from "../../Redux/features/AllGlobalStates";
+import { selectMailURL } from "../../Redux/features/MailsSlice";
 import { useSelector } from "react-redux";
 
 import "./home.css";
@@ -19,6 +20,8 @@ import "./home.css";
 const Home = () => {
   const iscomposeMailOpen = useSelector(selectComposeMail);
   const isAddProfileOpen = useSelector(selectOpenAddPhotoURL);
+  const MailUrl = useSelector(selectMailURL);
+
   return (
     <div className="home">
       <Header />
@@ -28,7 +31,7 @@ const Home = () => {
         {iscomposeMailOpen && <Compose />}
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/viewmail" element={<ViewMail />} />
+          <Route path={`/${MailUrl?.id}`} element={<ViewMail />} />
         </Routes>
       </div>
     </div>
