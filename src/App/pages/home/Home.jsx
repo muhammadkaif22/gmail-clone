@@ -5,7 +5,9 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Compose from "../../components/compose/Compose";
 import Main from "../../components/Main/Main";
 import AddProfile from "../../components/addProfile/AddProfile";
+import ViewMail from "../../components/ViewMail/ViewMail";
 
+import { Routes, Route } from "react-router-dom";
 import {
   selectComposeMail,
   selectOpenAddPhotoURL,
@@ -24,7 +26,10 @@ const Home = () => {
         <Sidebar />
         {isAddProfileOpen && <AddProfile />}
         {iscomposeMailOpen && <Compose />}
-        <Main />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/viewmail" element={<ViewMail />} />
+        </Routes>
       </div>
     </div>
   );

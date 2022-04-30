@@ -7,6 +7,8 @@
   border-bottom: 1px solid rgba(95, 95, 95, 0.137);
   cursor: pointer;
   background: var(--White);
+  z-index: 300;
+  margin-bottom: 2px;
 }
 .message.Message_read {
   background: var(--SamiLightWhite);
@@ -37,7 +39,7 @@
 }
 
 .message__center {
-  width: 60%;
+  width: 50%;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
@@ -52,7 +54,7 @@
   white-space: nowrap;
 }
 .message__center > p {
-  width: 700px;
+  width: 500px;
   font-size: 0.9rem;
   color: var(--LightBlack);
   font-weight: 400;
@@ -62,7 +64,7 @@
 }
 
 .message__right {
-  width: 10%;
+  width: 20%;
 }
 .message__right > h4 {
   font-size: 0.8rem;

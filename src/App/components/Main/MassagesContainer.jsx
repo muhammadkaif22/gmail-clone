@@ -40,32 +40,38 @@ const MassagesContainer = () => {
 
   const dispatch = useDispatch();
 
+  // getting the RecivedMails and sendmails
   useEffect(() => {
     if (activeMail == "inbox") {
-      const collectionRef = collection(
-        db,
-        "RecivedMails",
-        user?.email,
-        "mails"
+      onSnapshot(
+        query(
+          collection(db, "RecivedMails", user?.email, "mails"),
+          orderBy("time", "desc")
+        ),
+        (snapshot) => {
+          dispatch(setRecivedMails(snapshot.docs.map((data) => data.data())));
+        }
       );
-      const q = query(collectionRef);
-      const display = onSnapshot(q, (snapshot) => {
-        dispatch(setRecivedMails(snapshot.docs.map((data) => data.data())));
-      });
     }
     if (activeMail == "send") {
-      const collectionRef = collection(db, "SendMails", user?.email, "mails");
-      const q = query(collectionRef);
-      const display = onSnapshot(q, (snapshot) => {
-        dispatch(setRecivedMails(snapshot.docs.map((data) => data.data())));
-      });
+      onSnapshot(
+        query(
+          collection(db, "SendMails", user?.email, "mails"),
+          orderBy("time", "desc")
+        ),
+        (snapshot) => {
+          dispatch(setRecivedMails(snapshot.docs.map((data) => data.data())));
+        }
+      );
     }
   }, [recivedMails]);
 
+  // setting the RecivedMails to onScreenState
   useEffect(() => {
     dispatch(setonScreenMail(recivedMails));
   }, [recivedMails]);
 
+  // for storting the mail to categroy
   useEffect(() => {
     if (currentCategroy == "primary") {
       let sortedMails = recivedMails.filter((e) => {
@@ -187,6 +193,7 @@ const MassagesContainer = () => {
               username={data?.senderName}
               readMassges={data?.read}
               activeMail={activeMail}
+              time={data?.time}
             />
           );
         })}

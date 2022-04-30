@@ -4,6 +4,7 @@ import { Checkbox, IconButton, Tooltip, Zoom } from "@mui/material";
 import { StarBorder, GppMaybeOutlined } from "@mui/icons-material";
 import { db } from "../../backend/firebase/config";
 import { updateDoc, doc } from "firebase/firestore";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import "./message.css";
 
@@ -15,10 +16,13 @@ const Message = ({
   user,
   readMassges,
   activeMail,
+  time,
 }) => {
+  const navigate = useNavigate();
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   const ReadMsgFun = async () => {
+    navigate("/viewmail");
     try {
       if (activeMail == "inbox") {
         await updateDoc(doc(db, "RecivedMails", user?.email, "mails", id), {
@@ -62,7 +66,7 @@ const Message = ({
         <p>{body}</p>
       </div>
       <div className="message__right">
-        <h4>11:02 pm</h4>
+        <h4>{new Date(time?.toDate()).toUTCString()}</h4>
       </div>
     </div>
   );

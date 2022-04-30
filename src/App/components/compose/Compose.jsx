@@ -8,7 +8,7 @@ import { Button, TextField, Autocomplete } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
 import { db } from "../../backend/firebase/config";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 
 import "./compose.css";
 
@@ -50,6 +50,7 @@ const Compose = () => {
         body: userDetails.body,
         sender: user?.email,
         senderName: user?.displayName,
+        time: serverTimestamp(),
         read: true,
       });
 
@@ -71,6 +72,8 @@ const Compose = () => {
           body: userDetails.body,
           sender: user?.email,
           senderName: user?.displayName,
+          senderProfile: user?.photoURL,
+          time: serverTimestamp(),
           read: false,
         }
       );
