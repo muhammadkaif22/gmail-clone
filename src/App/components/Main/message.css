@@ -9,6 +9,7 @@
   background: var(--White);
   z-index: 300;
   margin-bottom: 2px;
+  position: relative;
 }
 .message.Message_read {
   background: var(--SamiLightWhite);
@@ -68,4 +69,25 @@
 }
 .message__right > h4 {
   font-size: 0.8rem;
+}
+
+/* code for responsive */
+
+@media (max-width: 900px) {
+  .message {
+    padding: 2px 0px 0 10px;
+    gap: 10px;
+  }
+  .message__left {
+    display: none;
+  }
+  .message__center {
+    width: 70% !important;
+  }
+  .message__right {
+    width: 30% !important;
+    top: 50%;
+    transform: translateY(-0%);
+    right: 1%;
+  }
 }

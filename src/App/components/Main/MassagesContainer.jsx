@@ -2,7 +2,14 @@ import { useState, useEffect } from "react";
 
 import Message from "./Message";
 
-import { Inbox, People, LocalOffer, MobileFriendly } from "@mui/icons-material";
+import {
+  Inbox,
+  People,
+  LocalOffer,
+  MobileFriendly,
+  CreateOutlined,
+} from "@mui/icons-material";
+import Button from "@mui/material/Button";
 
 import { selectUser } from "../../Redux/features/UserSilce";
 
@@ -10,6 +17,7 @@ import {
   selectCurrentMailcategroy,
   setCurrentMailcategroy,
   selectCurrentActiveMailOption,
+  OpenAndCloseopenComposeMail,
 } from "../../Redux/features/AllGlobalStates";
 
 import {
@@ -140,6 +148,18 @@ const MassagesContainer = () => {
 
   return (
     <div className="main__MessageContainer">
+      <Button
+        variant="contained"
+        size="large"
+        className="composeBtn"
+        onClick={() => dispatch(OpenAndCloseopenComposeMail())}
+      >
+        {" "}
+        {/* // this is for mobile layout */}
+        <CreateOutlined className="composeIcon" />
+        <span>compose</span>
+      </Button>
+
       {activeMail === "inbox" && (
         <div className="MessageContainer__tabs">
           {/* tabs */}

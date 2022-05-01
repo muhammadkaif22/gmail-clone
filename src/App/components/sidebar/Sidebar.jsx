@@ -2,12 +2,13 @@ import React from "react";
 
 import SidebarOptions from "./SidebarOptions";
 
-import { Videocam, Keyboard, Add } from "@mui/icons-material";
+import { Videocam, Keyboard, Add, Close } from "@mui/icons-material";
 import { Avatar, IconButton, Button } from "@mui/material";
 
 import {
   selectOpensidebarState,
   OpenAndCloseopenComposeMail,
+  OpenAndCloseSidebar,
 } from "../../Redux/features/AllGlobalStates";
 import { selectInboxTotalMails } from "../../Redux/features/MailsSlice";
 import { selectUser } from "../../Redux/features/UserSilce";
@@ -34,6 +35,13 @@ const Sidebar = () => {
           />
           <span>compose</span>
         </Button>
+
+        <IconButton
+          className="icon"
+          onClick={() => dispatch(OpenAndCloseSidebar())}
+        >
+          <Close />
+        </IconButton>
       </div>
 
       <div className="sidebar__optionsContainer">

@@ -1,6 +1,6 @@
 .main {
   width: 80%;
-  height: 79vh;
+  height: 80vh;
   transform: translateY(-70px);
 }
 .main.active {
@@ -9,6 +9,7 @@
 
 /* header */
 .main__header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,12 +59,14 @@
 
 .MessageContainer__tabs {
   width: 100%;
+  padding: 14px 0;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 17px;
 }
 .MessageContainer__tabs > .tab {
-  width: 25%;
+  flex: 0.3;
   height: 56px;
   display: flex;
   align-items: center;
@@ -72,7 +75,7 @@
   padding: 0 10px;
   border: none;
   border-radius: 4px;
-  gap: 17px;
+  gap: 4px;
   transition: 0.2s ease-in-out;
 }
 .MessageContainer__tabs > .tab::before {
@@ -117,6 +120,20 @@
   border-radius: 70px;
   text-transform: capitalize;
 }
+
+.main__MessageContainer .composeBtn {
+  position: fixed;
+  bottom: -10px;
+  right: 3%;
+  display: none;
+  align-items: center;
+  gap: 5px;
+  background: #0354bd !important;
+  border-radius: 6px !important;
+  text-transform: capitalize;
+}
+/* .main__MessageContainer .composeBtn > span {
+} */
 .tab > .unreadMsg.primary {
   background: var(--red);
 }
@@ -184,4 +201,71 @@
 
 .MessageContainer__tabs > .tab.updates::before {
   background: var(--green);
+}
+
+@media (max-width: 900px) {
+  .main {
+    width: 100% !important;
+    transform: translateY(0);
+    height: 90vh;
+  }
+  .main.active {
+    width: 100% !important;
+  }
+  .main__MessageContainer .composeBtn {
+    bottom: 4%;
+    right: 3%;
+  }
+  .main__MessageContainer .composeBtn {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 660px) {
+  .MessageContainer__tabs {
+    padding: 14px 6px;
+    gap: 8px !important;
+  }
+  .MessageContainer__tabs > .tab {
+    height: 46px;
+    padding: 0 10px;
+    /* gap: 2px; */
+    margin: 0 5px;
+  }
+  .tab > .icon {
+    display: none;
+  }
+  .tab > .unreadMsg {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    margin-bottom: 20px;
+  }
+  .tab > p {
+    transform: translateY(8px);
+  }
+}
+
+@media (max-width: 430px) {
+  MessageContainer__tabs {
+    gap: 0px !important;
+  }
+
+  .MessageContainer__tabs > .tab {
+    height: 48px !important;
+    padding: 0 6px !important;
+    margin: 0 0px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  MessageContainer__tabs {
+    gap: 0px !important;
+  }
+
+  .MessageContainer__tabs > .tab {
+    height: 55px !important;
+    padding: 0 4px !important;
+    margin: 0 0px !important;
+  }
 }

@@ -13,6 +13,7 @@
 .sidebar__top {
   width: 100%;
   margin-left: 10px;
+  position: relative;
 }
 
 .sidebar__composeBtn {
@@ -47,6 +48,12 @@
   color: var(--LightBlack);
 }
 
+.sidebar__top .icon {
+  position: absolute;
+  top: 0;
+  right: 2%;
+  display: none;
+}
 /* active classes */
 
 .sidebar.active .sidebar__composeBtn {
@@ -222,4 +229,77 @@
 }
 .sidebar.active .hangoutsContainer__userprofile .icon {
   display: none;
+}
+
+/* code for responsive */
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 0;
+    position: fixed;
+    left: 0;
+    top: 0px;
+    background: var(--White);
+    z-index: 800;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .sidebar.active {
+    width: 38% !important;
+  }
+  .sidebar.active .sidebar__top .icon {
+    display: block;
+  }
+  .sidebar .sidebar__top .sidebar__composeBtn {
+    display: none !important;
+  }
+
+  .sidebar__optionsContainer {
+    height: auto;
+    margin-top: 40px;
+  }
+
+  .sidebar .sidebar__hangoutsContainer {
+    display: none;
+  }
+  .sidebar .sidebar__meetingCotainer {
+    display: none;
+  }
+
+  /* .hangoutsContainer__userprofile > span .userprofile__profile {
+    display: none;
+  }
+
+  .sidebar .hangoutsContainer__userprofile > span p {
+    display: none;
+  }
+  .sidebar .hangoutsContainer__userprofile .icon {
+    display: none;
+  } */
+
+  .sidebar.active .sidebar__hangoutsContainer {
+    display: block;
+  }
+  .sidebar.active .sidebar__meetingCotainer {
+    display: block;
+  }
+
+  .sidebar.active .hangoutsContainer__userprofile > span p {
+    display: block;
+  }
+  .sidebar.active .hangoutsContainer__userprofile .icon {
+    display: block;
+  }
+  .sidebar.active .sidebar__meetingoptions > .sidebar__option > span {
+    display: block;
+  }
+  .sidebar.active .sidebarr__option > span p {
+    display: block;
+  }
+}
+
+@media (max-width: 500px) {
+  .sidebar.active {
+    width: 50% !important;
+  }
 }

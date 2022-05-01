@@ -7,4 +7,5 @@
   align-items: center;
   position: relative;
   gap: 20px;
+  overflow-x: hidden;
 }

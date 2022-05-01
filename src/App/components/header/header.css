@@ -1,4 +1,5 @@
 .header {
+  width: 100% !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -187,4 +188,24 @@
   border-radius: 50%;
   margin: 0 8px;
   background: rgba(0, 0, 0, 0.7);
+}
+
+/* code for responsive */
+@media (max-width: 900px) {
+  .header__logo {
+    display: none !important;
+  }
+  .header__center {
+    width: 97%;
+  }
+  .header__center > form > .icon {
+    display: none;
+  }
+  .header__right > .icon {
+    display: none;
+  }
+  .header__center > form input {
+    padding: 16px 10px 16px 20px;
+    font-size: 0.9rem;
+  }
 }

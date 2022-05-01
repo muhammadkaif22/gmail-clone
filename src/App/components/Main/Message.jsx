@@ -47,7 +47,7 @@ const Message = ({
   return (
     <div
       className={`message ${readMassges && "Message_read"}`}
-      onClick={ReadMsgFun}
+      onClick={subject && body ? "" : ReadMsgFun}
     >
       <div className="message__left">
         <Checkbox {...label} />
@@ -66,7 +66,11 @@ const Message = ({
 
         <span className="message__username">{senderName}</span>
       </div>
-      <div className="message__center">
+
+      <div
+        className="message__center"
+        onClick={subject && body ? ReadMsgFun : ""}
+      >
         <h5>{subject}</h5>
         <p>{body}</p>
       </div>
