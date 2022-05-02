@@ -27,7 +27,7 @@ const Main = () => {
         <div className="header__left">
           <Checkbox {...label} />
 
-          <IconButton className="icon" onClick={() => window.reload}>
+          <IconButton className="icon" onClick={() => window.location.reload()}>
             <Refresh />
           </IconButton>
           <IconButton className="icon">

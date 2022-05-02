@@ -122,18 +122,17 @@
 }
 
 .main__MessageContainer .composeBtn {
+  width: 123px !important;
+  height: 49px;
   position: fixed;
-  bottom: -10px;
-  right: 3%;
   display: none;
   align-items: center;
   gap: 5px;
   background: #0354bd !important;
-  border-radius: 6px !important;
+  border-radius: 12px !important;
   text-transform: capitalize;
+  z-index: 900;
 }
-/* .main__MessageContainer .composeBtn > span {
-} */
 .tab > .unreadMsg.primary {
   background: var(--red);
 }
@@ -213,8 +212,12 @@
     width: 100% !important;
   }
   .main__MessageContainer .composeBtn {
-    bottom: 4%;
-    right: 3%;
+    bottom: -6%;
+    right: 4%;
+  }
+  .main__MessageContainer::-webkit-scrollbar {
+    width: 7px;
+    margin-right: 2px;
   }
   .main__MessageContainer .composeBtn {
     display: flex !important;
