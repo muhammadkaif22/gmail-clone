@@ -245,7 +245,7 @@
     overflow-x: hidden;
   }
   .sidebar.active {
-    width: 38% !important;
+    width: 35% !important;
   }
   .sidebar.active .sidebar__top .icon {
     display: block;
@@ -300,6 +300,6 @@
 
 @media (max-width: 500px) {
   .sidebar.active {
-    width: 50% !important;
+    width: 67% !important;
   }
 }

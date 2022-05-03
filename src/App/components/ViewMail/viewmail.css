@@ -94,3 +94,18 @@
   border: 1px solid rgba(95, 95, 95, 0.3) !important;
   background: var(--LightWhite);
 }
+
+@media (max-width: 475px) {
+  .viewMails__body .body__top {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .body__top .top__time {
+    margin-left: 50px;
+    transform: translateY(-7px);
+  }
+  .top__time > p {
+    font-size: 0.7rem;
+  }
+}

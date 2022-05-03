@@ -212,15 +212,18 @@
     width: 100% !important;
   }
   .main__MessageContainer .composeBtn {
-    bottom: -6%;
-    right: 4%;
+    display: flex !important;
+  }
+  .main__MessageContainer .composeBtn {
+    bottom: 2% !important;
+    right: 4% !important;
+  }
+  .MessageContainer__tabs > .tab:hover {
+    background: none !important;
   }
   .main__MessageContainer::-webkit-scrollbar {
     width: 7px;
     margin-right: 2px;
-  }
-  .main__MessageContainer .composeBtn {
-    display: flex !important;
   }
 }
 
