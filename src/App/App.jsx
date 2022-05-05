@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 import Home from "./pages/home/Home";
 import Signin from "./components/signin/Signin";
@@ -17,16 +17,20 @@ const App = () => {
   const [PageLoading, setPageLoading] = useState(false);
   const dispatch = useDispatch();
 
+  useLayoutEffect(() => {
+    setPageLoading(true);
+  }, []);
+
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         setPageLoading(true);
-
         setTimeout(() => {
           dispatch(signin(authUser));
           setPageLoading(false);
         }, RandomPageLoadingTime());
       } else {
+        setPageLoading(false);
         dispatch(signOut());
       }
     });
