@@ -15,10 +15,10 @@ import "./compose.css";
 const Compose = () => {
   const user = useSelector(selectUser);
   const [options, setoptions] = useState([
-    "Primary",
-    "Social",
-    "Promotions",
-    "Updates",
+    "primary",
+    "social",
+    "promotions",
+    "updates",
   ]);
   const [inputValue, setInputValue] = React.useState("");
   const [categroy, setcategroy] = useState(options[0]);

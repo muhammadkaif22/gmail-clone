@@ -84,33 +84,9 @@ const MassagesContainer = () => {
 
   // for storting the mail to categroy
   useEffect(() => {
-    if (currentCategroy == "primary") {
+    if (currentCategroy == currentCategroy) {
       let sortedMails = recivedMails.filter((e) => {
-        return e.categroy == "Primary";
-      });
-
-      dispatch(setonScreenMail(sortedMails));
-    }
-
-    if (currentCategroy == "social") {
-      let sortedMails = recivedMails.filter((e) => {
-        return e.categroy == "Social";
-      });
-
-      dispatch(setonScreenMail(sortedMails));
-    }
-
-    if (currentCategroy == "promotions") {
-      let sortedMails = recivedMails.filter((e) => {
-        return e.categroy == "Promotions";
-      });
-
-      dispatch(setonScreenMail(sortedMails));
-    }
-
-    if (currentCategroy == "updates") {
-      let sortedMails = recivedMails.filter((e) => {
-        return e.categroy == "Updates";
+        return e.categroy == currentCategroy;
       });
 
       dispatch(setonScreenMail(sortedMails));
@@ -125,22 +101,22 @@ const MassagesContainer = () => {
       dispatch(setInboxTotalMails(totalMailindex.length));
 
       let primarymail = totalMailindex.filter((e) => {
-        return e.categroy === "Primary";
+        return e.categroy === "primary";
       });
       setprimarymails(primarymail.length);
 
       let socialmail = totalMailindex.filter((e) => {
-        return e.categroy === "Social";
+        return e.categroy === "social";
       });
       setsocialmails(socialmail.length);
 
       let promotionsmail = totalMailindex.filter((e) => {
-        return e.categroy == "Promotions";
+        return e.categroy == "promotions";
       });
       setpromotionsmails(promotionsmail.length);
 
       let updatemail = totalMailindex.filter((e) => {
-        return e.categroy == "Updates";
+        return e.categroy == "updates";
       });
       setupdatesmails(updatemail.length);
     }
