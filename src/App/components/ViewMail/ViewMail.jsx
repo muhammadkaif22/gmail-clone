@@ -31,14 +31,17 @@ const ViewMail = () => {
   const MailUrl = useSelector(selectMailURL);
   const recivedMails = useSelector(selectRecivedMails);
   const activeMailOption = useSelector(selectCurrentActiveMailOption);
+  const [loading, setloading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (MailUrl) {
+      setloading(true);
       const unsub = onSnapshot(
         doc(db, "RecivedMails", MailUrl?.recipients, "mails", MailUrl?.id),
         (data) => {
           setviewMailData(data.data());
+          setloading(false);
         }
       );
       return () => unsub();
@@ -81,37 +84,43 @@ const ViewMail = () => {
       </div>
 
       {/* body */}
-      <div className="viewMails__body">
-        <h3 className="body__subject">{viewMailData?.subject}</h3>
-        <div className="body__top">
-          <div className="top__userinfo">
-            <Avatar
-              alt={viewMailData?.senderName}
-              src={viewMailData?.senderProfile}
-            />
-            <span>
-              <h5>{viewMailData?.senderName}</h5>
-              <p>{`<${viewMailData?.sender}>`}</p>
-            </span>
+      {loading ? (
+        <div className="loading">
+          <CircularProgress />
+        </div>
+      ) : (
+        <div className="viewMails__body">
+          <h3 className="body__subject">{viewMailData?.subject}</h3>
+          <div className="body__top">
+            <div className="top__userinfo">
+              <Avatar
+                alt={viewMailData?.senderName}
+                src={viewMailData?.senderProfile}
+              />
+              <span>
+                <h5>{viewMailData?.senderName}</h5>
+                <p>{`<${viewMailData?.sender}>`}</p>
+              </span>
+            </div>
+            <div className="top__time">
+              <p>{new Date(viewMailData?.time?.toDate()).toUTCString()}</p>
+            </div>
           </div>
-          <div className="top__time">
-            <p>{new Date(viewMailData?.time?.toDate()).toUTCString()}</p>
+          <div className="body__mainContent">
+            <p className="mainContent__content">{viewMailData?.body}</p>
+          </div>
+          <div className="body__footer">
+            <Button variant="outlined" size="large" className="footer__btn">
+              <Reply className="icon" />
+              <p>Reply</p>
+            </Button>
+            <Button variant="outlined" size="large" className="footer__btn">
+              <Forward className="icon" />
+              <p>Forward</p>
+            </Button>
           </div>
         </div>
-        <div className="body__mainContent">
-          <p className="mainContent__content">{viewMailData?.body}</p>
-        </div>
-        <div className="body__footer">
-          <Button variant="outlined" size="large" className="footer__btn">
-            <Reply className="icon" />
-            <p>Reply</p>
-          </Button>
-          <Button variant="outlined" size="large" className="footer__btn">
-            <Forward className="icon" />
-            <p>Forward</p>
-          </Button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -95,6 +95,13 @@
   background: var(--LightWhite);
 }
 
+.loading {
+  width: 100%;
+  display: grid;
+  place-content: center;
+  height: 20%;
+}
+
 @media (max-width: 475px) {
   .viewMails__body .body__top {
     justify-content: flex-start;
