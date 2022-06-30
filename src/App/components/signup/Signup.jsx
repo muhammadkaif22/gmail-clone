@@ -58,13 +58,20 @@ const Signup = () => {
   }, [userdeltails]);
 
   const SignUpTheUser = async () => {
-    if (
-      userdeltails.firstname.length > 2 &&
-      userdeltails.lastname.length > 2 &&
-      userdeltails.email.length > 7 &&
-      userdeltails.password.length > 7 &&
-      userdeltails.password == userdeltails.confirmPassword
-    ) {
+    if (userdeltails.password.length > 7) {
+      seterrors({
+        password: {
+          state: true,
+          msg:
+            userdeltails.password.length < 7
+              ? "Your Password must be upto 8 charates or numbers"
+              : userdeltails.password !== userdeltails.confirmPassword
+              ? "The Password did not match to each other try again"
+              : seterrors({ password: { state: false, msg: "" } }),
+        },
+      });
+    }
+    if (userdeltails.password === userdeltails.confirmPassword) {
       dispatch(setloadingTrue());
       setTimeout(() => {
         createUserWithEmailAndPassword(
@@ -82,7 +89,7 @@ const Signup = () => {
             dispatch(CloseSignUp());
           })
           .catch((error) => {
-            if (error.code == "auth/email-already-in-use") {
+            if (error.code === "auth/email-already-in-use") {
               dispatch(setloadingFalse());
               seterrors({
                 email: {
@@ -95,19 +102,10 @@ const Signup = () => {
       }, RandomLoadingTime());
     } else {
       seterrors({
-        email: {
-          state: true,
-          msg:
-            userdeltails.email.length < 10
-              ? "Please write the corrent email"
-              : seterrors({ email: { state: false, msg: "" } }),
-        },
         password: {
           state: true,
           msg:
-            userdeltails.password.length < 7
-              ? "Your Password must be upto 8 charates or numbers"
-              : userdeltails.password !== userdeltails.confirmPassword
+            userdeltails.password !== userdeltails.confirmPassword
               ? "The Password did not match to each other try again"
               : seterrors({ password: { state: false, msg: "" } }),
         },

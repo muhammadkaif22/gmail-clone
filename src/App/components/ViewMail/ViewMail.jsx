@@ -17,7 +17,6 @@ import {
   selectMailURL,
   selectRecivedMails,
 } from "../../Redux/features/MailsSlice";
-import { selectCurrentActiveMailOption } from "../../Redux/features/AllGlobalStates";
 import { selectUser } from "../../Redux/features/UserSilce";
 
 import { db } from "../../backend/firebase/config";
@@ -30,7 +29,6 @@ const ViewMail = () => {
   const [viewMailData, setviewMailData] = useState([]);
   const MailUrl = useSelector(selectMailURL);
   const recivedMails = useSelector(selectRecivedMails);
-  const activeMailOption = useSelector(selectCurrentActiveMailOption);
   const [loading, setloading] = useState(false);
   const navigate = useNavigate();
 
